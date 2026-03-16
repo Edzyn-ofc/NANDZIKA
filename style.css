@@ -1,0 +1,307 @@
+/* =========================================
+   1. Variáveis e Reset (Baseado no Figma)
+   ========================================= */
+:root {
+    /* Cores Principais */
+    --bg-body: #B0B0B0;          /* Cinza claro de fundo */
+    --header-bg: #1B1B2F;        /* Azul escuro do topo/rodapé */
+    --accent-orange: #FF7A50;    /* Laranja da marca */
+    --accent-purple: #7B61FF;    /* Roxo do banner */
+    
+    /* Cores dos Cards */
+    --card-dark: #2C2C2C;        /* Fundo escuro dos cards Hero */
+    --card-grey: #9E9E9E;        /* Fundo dos cards de curso */
+    --card-pill: #666666;        /* Fundo dos itens 'Sobre Nós' */
+    --card-white: #eee5e5;       /* Fundo dos contatos */
+    
+    /* Botão Gradiente (Ciano para Verde) */
+    --btn-gradient: linear-gradient(90deg, #7EE8FA 0%, #80FF72 100%);
+    
+    /* Tipografia e Bordas */
+    --font-main: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    --radius-lg: 30px;           /* Arredondamento forte do design */
+    --radius-md: 20px;
+    --radius-sm: 10px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-main);
+    background-color: var(--bg-body);
+    color: #333;
+    overflow-x: hidden; /* Evita rolagem lateral indesejada */
+}
+
+a { text-decoration: none; color: inherit; }
+ul { list-style: none; }
+
+/* =========================================
+   2. Header e Navegação
+   ========================================= */
+header {
+    background-color: var(--header-bg);
+    padding: 20px 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+}
+
+.logo {
+    
+background: linear-gradient(90deg, #DF7308, #54586D, #A1410A, #600C0C);
+    font-size: 1.6rem;
+    font-weight: bold;
+    letter-spacing: 1px;
+    -webkit-background-clip: text;
+    background-clip: text;
+
+    /* 3. Deixamos a cor natural do texto transparente para que o fundo brilhe através dele */
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+
+    /* Estética extra: um negrito ajuda a ver melhor o gradiente */
+    font-weight: bold;
+    display: inline-block;
+}
+
+.logo span {
+    color: var(--accent-orange);
+}
+
+nav ul {
+    display: flex;
+    gap: 20px;
+}
+
+nav a {
+    color: #42C946;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: color 0.3s;
+    text-transform: uppercase;
+}
+
+nav a:hover {
+    color: var(--accent-orange);
+}
+
+/* =========================================
+   3. Banner de Boas-vindas (Roxo)
+   ========================================= */
+.welcome-banner {
+    background: linear-gradient(90deg, #7874E2, #3A4661 60%);
+    color: #FBBBBB;
+    text-align: center;
+    padding: 15px 20px;
+    font-size: 1.2rem;
+}
+
+.welcome-banner h3 {
+    margin-bottom: 15px;
+    font-size: 1rem;
+}
+
+/* =========================================
+   4. Container Principal e Hero Section
+   ========================================= */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 90px 60px;
+}
+
+.hero-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Duas colunas */
+    gap: 30px;
+    margin-bottom: 20px;
+}
+
+/* Estilo Base dos Cards */
+.card {
+    background-color: var(--card-dark); /* Fallback se não tiver img */
+    border-radius: var(--radius-lg);
+    padding: 40px;
+    color: white;
+    position: relative;
+    overflow: hidden;
+    min-height: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+}
+
+/* Simulando a imagem de fundo escura com gradiente */
+.card-image {
+    background: linear-gradient(rgba(236, 224, 224, 0.6), rgba(0,0,0,0.6)), url('https://source.unsplash.com/random/800x600/?sunset,africa'); 
+    background-size: cover;
+    background-position: center;
+    text-align: center;
+    align-items: center;
+}
+
+.card h1 { font-size: 2.5rem; font-weight: 900; line-height: 1; }
+.card h2 { font-size: 0.8rem; font-weight: 800; margin-top: 5px; }
+
+/* Placeholder img sumindo para dar lugar ao background CSS */
+.placeholder-img { display: none; } 
+
+/* Card de texto (Direita) */
+.card:not(.card-image) {
+    background-color: #D9D9D9; /* Cinza claro do design */
+    color: #333;
+    text-align: center;
+    align-items: center;
+    font-size: 1.8rem;
+    font-weight: 800;
+}
+
+/* =========================================
+   5. Seção de Cursos
+   ========================================= */
+.section-title {
+    text-align: center;
+    font-size: 1.8rem;
+    margin: 40px 0 20px 0;
+    text-transform: uppercase;
+    font-weight: 800;
+    letter-spacing: 2px;
+}
+
+.courses-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.course-card {
+    background-color: var(--card-grey); /* Cinza médio */
+    border-radius: var(--radius-md);
+    padding: 100px 60px;
+    text-align: center;
+    color: white;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+    transition: transform 0.3s;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.course-card:hover { transform: translateY(-5px); }
+
+.course-card h4 {
+    font-size: 1.2rem;
+    margin-bottom: 15px;
+    color: #222; /* Título escuro no card cinza */
+}
+
+.course-card ul {
+    text-align: left;
+    font-size: 0.85rem;
+    color: #333;
+    margin-bottom: 20px;
+    padding-left: 10px;
+}
+
+.course-card li { margin-bottom: 8px; }
+
+/* Botão Aderir (Gradiente Ciano/Verde) */
+.btn-aderir {
+    background: var(--btn-gradient);
+    border: none;
+    padding: 12px;
+    width: 100%;
+    border-radius: 50px;
+    color: white;
+    font-weight: 900;
+    font-style: italic;
+    cursor: pointer;
+    text-transform: uppercase;
+    box-shadow: 0 4px 10px rgba(78, 217, 219, 0.4);
+    transition: opacity 0.3s;
+}
+
+.btn-aderir:hover { opacity: 0.9; }
+
+/* =========================================
+   6. Sobre Nós (Pills Escuras)
+   ========================================= */
+.about-section {
+    background-color: #999; /* Container cinza */
+    border-radius: var(--radius-lg);
+    padding: 80px;
+    margin-top: 50px;
+    text-align: center;
+}
+
+.about-grid {
+    display: flex;
+    justify-content: space-around;
+    gap: 35px;
+    margin-top: 20px;
+    flex-wrap: wrap;
+}
+
+.about-item {
+    background-color: var(--card-pill); /* Cinza escuro */
+    color: white;
+    border-radius: 40px; /* Borda bem redonda */
+    padding: 70px 60px;
+    flex: 1;
+    min-width: 210px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+.about-item h5 { font-size: 1.1rem; margin-bottom: 5px; }
+
+/* =========================================
+   7. Contactos (Pills Brancas)
+   ========================================= */
+.contact-grid {
+    display: flex;
+    justify-content: center;
+    gap: 90px;
+    margin-top: 20px;
+    flex-wrap: wrap;
+}
+
+.contact-box {
+    background-color: var(--card-white);
+    padding: 30px 40px;
+    border-radius: 30px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    min-width: 280px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.contact-box span { font-size: 1.5rem; }
+.contact-box strong { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; }
+.contact-box small { font-size: 0.9rem; font-weight: bold; }
+
+/* =========================================
+   8. Footer
+   ========================================= */
+footer {
+    background-color: var(--header-bg);
+    color: #888;
+    text-align: center;
+    padding: 20px;
+    font-size: 0.8rem;
+    margin-top: 50px;
+    border-top: 3px solid var(--accent-purple);
+}
+@media (max-width: 768px) { 
+    nav { 
+        flex-direction: column; 
+        align-items: center; 
+    } 
+}
