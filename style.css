@@ -111,9 +111,9 @@ nav a:hover {
    4. Container Principal e Hero Section
    ========================================= */
 .container {
-    max-width: 1200px;
+    max-width: 900px;
     margin: 0 auto;
-    padding: 90px 60px;
+    padding: 40px 60px;
 }
 
 .hero-grid {
@@ -191,7 +191,7 @@ nav a:hover {
     transition: transform 0.3s;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    
 }
 
 .course-card:hover { transform: translateY(-5px); }
