@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pagamentos - Nandzika Academy</title>
+    <link rel="stylesheet" href="presencial.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .aviso-copia { display: none; position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%); background: #333; color: #fff; padding: 12px 20px; border-radius: 8px; z-index: 10001; border-left: 5px solid #fdd835; }
+        .resumo-box { background: #fff9e6; padding: 15px; border-radius: 10px; border: 1px solid #fdd835; margin: 20px 0; font-size: 0.9rem; }
+        .payment-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 10px; }
+        .payment-card { background: #efefef; padding: 15px; border-radius: 10px; text-align: center; border: 1px solid #ddd; }
+        #preview-img { max-width: 100%; max-height: 250px; border-radius: 8px; display: none; margin: 15px auto; border: 3px solid #25D366; }
+        .btn-zap { background: #25D366; color: white; padding: 18px; border-radius: 50px; display: flex; align-items: center; justify-content: center; gap: 10px; text-decoration: none; font-weight: bold; opacity: 0.5; pointer-events: none; transition: 0.3s; }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <a href="index.html" class="btn-voltar">← VOLTAR</a>
+        <div class="logo">NANDZIKA ACADEMY</div>
+    </nav>
+    
+
+    <main class="container">
+        <div class="hero-card">
+            <p style="color: #ff4d4d; font-weight: bold; text-transform: uppercase;">
+                Olá, você está a poucos passos do início do seu curso. Veja a tabela abaixo, escolha o nível, efetue o pagamento e, posteriormente, mande o comprovativo através das linhas de contacto abaixo.
+            </p>
+        </div>
+
+        <div class="header-title">PAGAMENTO</div>
+        <section class="registration-form">
+            <h2>TABELA DE CURSO DE INGLÊS</h2>
+            
+            <div class="form-group">
+                <div class="table-container" style="overflow-x: auto;">
+                    <table style="width: 100%; border-collapse: separate; border-spacing: 10px; text-align: center;">
+                        <thead>
+                            <tr>
+                                <th style="background: white; padding: 10px; border-radius: 5px;">NÍVEL</th>
+                                <th style="background: white; padding: 10px; border-radius: 5px;">DURAÇÃO</th>
+                                <th style="background: white; padding: 10px; border-radius: 5px;">INSCRIÇÃO</th>
+                                <th style="background: white; padding: 10px; border-radius: 5px;">MENSALIDADE</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td style="background: white; padding: 10px; border-radius: 5px;">I</td>
+                                <td style="background: white; padding: 10px; border-radius: 5px;">16 SEMANAS</td>
+                                <td style="background: white; padding: 10px; border-radius: 5px;">500 MzN</td>
+                                <td style="background: white; padding: 10px; border-radius: 5px;">1000 MzN</td>
+                            </tr>
+                            <tr>
+                                <td style="background: white; padding: 10px; border-radius: 5px;">II</td>
+                                <td style="background: white; padding: 10px; border-radius: 5px;">16 SEMANAS</td>
+                                <td style="background: white; padding: 10px; border-radius: 5px;">500 MzN</td>
+                                <td style="background: white; padding: 10px; border-radius: 5px;">1000 MzN</td>
+                            </tr>
+                            <tr>
+                                <td style="background: white; padding: 10px; border-radius: 5px;">III</td>
+                                <td style="background: white; padding: 10px; border-radius: 5px;">16 SEMANAS</td>
+                                <td style="background: white; padding: 10px; border-radius: 5px;">500 MzN</td>
+                                <td style="background: white; padding: 10px; border-radius: 5px;">1000 MzN</td>
+                            </tr>
+                            <tr>
+                                <td style="background: white; padding: 10px; border-radius: 5px;">IV</td>
+                                <td style="background: white; padding: 10px; border-radius: 5px;">16 SEMANAS</td>
+                                <td style="background: white; padding: 10px; border-radius: 5px;">500 MzN</td>
+                                <td style="background: white; padding: 10px; border-radius: 5px;">1000 MzN</td>
+                            </tr>
+                            <tr>
+                                <td style="background: white; padding: 10px; border-radius: 5px;">V</td>
+                                <td style="background: white; padding: 10px; border-radius: 5px;">16 SEMANAS</td>
+                                <td style="background: white; padding: 10px; border-radius: 5px;">500 MzN</td>
+                                <td style="background: white; padding: 10px; border-radius: 5px;">1000 MzN</td>
+                            </tr>
+
+
+
+                            </tbody>
+                    </table>
+                </div>
+            </div>
+
+        <div class="resumo-box">
+            <h3 style="margin-top:0">RESUMO DA INSCRIÇÃO:</h3>
+            <div id="display-dados">Aguardando dados...</div>
+        </div>
+
+        <h2>FORMAS DE PAGAMENTO</h2>
+
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 5px; width: 100%;">
+                
+                <div class="form-group" style="text-align: center; background: #dcdcdc;">
+                    <h3>📱 M-Pesa</h3>
+                    <p>Número:</p>
+                    <strong id="mpesa-num">849215273</strong>
+                    <p style="font-size: 0.7rem; margin-top: 10px;">Envie o comprovativo após o pagamento</p>
+                    <button class="btn-voltar" style="background: #c5a059; margin-top: 10px; border:none; cursor:pointer;" onclick="copyText('849215273')">COPIAR</button>
+                </div>
+
+                <div class="form-group" style="text-align: center; background: #dcdcdc;">
+                    <h3>📱 E-Mola</h3>
+                    <p>Número:</p>
+                    <strong>879615045</strong>
+                    <p style="font-size: 0.7rem; margin-top: 10px;">Envie o comprovativo após o pagamento</p>
+                    <button class="btn-voltar" style="background: #c5a059; margin-top: 10px; border:none; cursor:pointer;" onclick="copyText('879615045')">COPIAR</button>
+                </div>
+
+                <div class="form-group" style="text-align: center; background: #dcdcdc;">
+                    <h3>🏛️ BIM</h3>
+                    <p>Conta:</p>
+                    <strong>88769260</strong>
+                    <p style="font-size: 0.7rem; margin-top: 10px;">Transferência Bancária</p>
+                    <button class="btn-voltar" style="background: #c5a059; margin-top: 10px; border:none; cursor:pointer;" onclick="copyText('88769260')">COPIAR</button>
+                </div>
+                <div class="form-group" style="text-align: center; background: #dcdcdc;">
+                    <h3>🏛️ BCI</h3>
+                    <p>Conta:</p>
+                    <strong>000800009706460310180</strong>
+                    <p style="font-size: 0.7rem; margin-top: 10px;">Transferência Bancária Internacional</p>
+                    <button class="btn-voltar" style="background: #c5a059; margin-top: 10px; border:none; cursor:pointer;" onclick="copyText('88769260')">COPIAR</button>
+                </div>
+
+            </div>
+
+
+        <div style="margin: 20px 0; text-align: center; border: 2px dashed #ccc; padding: 20px; border-radius: 10px;">
+            <p><strong>Anexe a foto do comprovativo:</strong></p>
+            <input type="file" id="file-input" accept="image/*" style="margin-top:10px">
+            <img id="preview-img" src="#" alt="Preview">
+        </div>
+
+        <a href="#" id="btn-whatsapp" class="btn-zap">
+            <i class="fab fa-whatsapp"></i> ENVIAR COMPROVATIVO
+        </a>
+        <p id="status-msg" style="text-align:center; color:red; font-size:0.8rem; margin-top:10px">Selecione a foto para liberar o envio.</p>
+
+    </main>
+
+    <div id="toast" class="aviso-copia">Copiado!</div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // BUSCA A CHAVE QUE SALVAMOS NO SCRIPT.JS
+            const dadosSalvos = localStorage.getItem('dadosMatricula');
+            const btnZap = document.getElementById('btn-whatsapp');
+            const fileInput = document.getElementById('file-input');
+            const preview = document.getElementById('preview-img');
+            const display = document.getElementById('display-dados');
+
+            if (dadosSalvos) {
+                try {
+                    const d = JSON.parse(dadosSalvos);
+                    
+                    // Preenche o resumo na tela
+                    display.innerHTML = `
+                        <b>Nome:</b> ${d.nome}<br>
+                        <b>Turma:</b> ${d.horario} (${d.nivel})<br>
+                        <b>Local:</b> ${d.bairro.toUpperCase()}
+                    `;
+
+                    // Prepara o link do WhatsApp
+                    const numZap = "258844121350"; // Número do WhatsApp da Nandzika Academy
+                    const texto = `Olá! Sou o(a) *${d.nome}*.\nSeguem os dados da minha matrícula:\n📍 Local: *${d.bairro}*\n⏰ Horário: *${d.horario}*\n📊 Nível: *${d.nivel}*\n\nEnvio em anexo o comprovativo.`;
+                    btnZap.href = `https://wa.me/${numZap}?text=${encodeURIComponent(texto)}`;
+                    
+                } catch (e) {
+                    console.error("Erro ao ler dados:", e);
+                    display.innerText = "Erro ao carregar dados da matrícula.";
+                }
+            } else {
+                display.innerText = "Nenhum dado encontrado. Por favor, preencha o formulário novamente.";
+            }
+
+            // Lógica do Preview da Imagem
+            fileInput.addEventListener('change', function() {
+                const file = this.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        preview.src = e.target.result;
+                        preview.style.display = 'block';
+                        
+                        // ATIVA O BOTÃO
+                        btnZap.style.opacity = '1';
+                        btnZap.style.pointerEvents = 'auto';
+                        
+                        const status = document.getElementById('status-msg');
+                        status.style.color = 'green';
+                        status.innerText = '✓ Tudo pronto! Clique para enviar.';
+                    }
+                    reader.readAsDataURL(file);
+                }
+            });
+        });
+
+        function copyText(t) {
+            navigator.clipboard.writeText(t);
+            const toast = document.getElementById('toast');
+            toast.style.display = 'block';
+            setTimeout(() => toast.style.display = 'none', 2000);
+        }
+    </script>
+</body>
+</html>
