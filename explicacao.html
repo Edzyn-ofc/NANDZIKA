@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nandzika Academy - Explicações</title>
+    <link rel="stylesheet" href="explicacao.css">
+</head>
+<body>
+
+    <header class="navbar">
+        <a href="index.html" class="btn-voltar">
+            <span>&larr;</span> VOLTAR
+        </a>
+        <div class="logo">NANDZIKA ACADEMY</div>
+        <div class="menu-icon">🏛️</div>
+    </header>
+
+    <div class="header-title">EXPLICACAO</div>
+
+    <main class="container">
+        <section class="hero-card">
+            <h1>Explicações de Ciências + DGD</h1>
+            <p>Explicações de Ciências e DGD para estudantes do Ensino Secundário. Suporte escolar completo com professores especializados.</p>
+        </section>
+
+        <form class="registration-form">
+            <h2>Complete seu Cadastro</h2>
+
+            <div class="form-group">
+                <h3>Informações Pessoais</h3>
+                <label>Nome Completo:</label>
+                <input type="text" id="nome" required>
+                
+                <label>Telefone:</label>
+                <input type="tel" id="telefone" required >
+                
+                <label>E-mail:</label>
+                <input type="email" id="email" required>
+                
+                <label>Idade:</label>
+                <input type="number" id="idade" required>
+            </div>
+
+        <div class="form-group">
+    <h3>Localização</h3>
+    <div class="selection-box">
+        <div class="selection-header" onclick="toggleAccordion(this)">
+            <span>- SELECIONE O BAIRRO</span>
+            <span class="arrow">▼</span>
+        </div>
+        <div class="options-container accordion-content">
+            <label><input type="radio" name="bairro" value="habel-jafar"> HABEL-JAFAR</label>
+            <label><input type="radio" name="bairro" value="mateque"> MATEQUE</label>
+            <label><input type="radio" name="bairro" value="ricatlha"> RICATLA</label>
+            <label><input type="radio" name="bairro" value="zintava"> ZINTAVA</label>
+            <label><input type="radio" name="bairro" value="albasine"> ALBASINE</label>
+            <label><input type="radio" name="bairro" value="outro"> OUTRO</label>
+        </div>
+    </div>
+</div>
+
+<div class="form-group">
+    <h3>Horários</h3>
+    <div class="selection-box">
+        <div class="selection-header" onclick="toggleAccordion(this)">
+            <span>- SELECIONE O HORÁRIO</span>
+            <span class="arrow">▼</span>
+        </div>
+        <div class="options-container accordion-content">
+            <label><input type="radio" name="horario" value=""> /label>
+            <label><input type="radio" name="horario" value=""></label>
+            <label><input type="radio" name="horario" value=""> </label>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="form-group">
+    <h3>Disciplinas</h3>
+    <div class="selection-box">
+        <div class="selection-header" onclick="toggleAccordion(this)">
+            <span>- SELECIONE A DISCIPLINA</span>
+            <span class="arrow">▼</span>
+        </div>
+        <div class="options-container accordion-content">
+           <div class="disciplinas">
+        <label for="matematica" class="disciplina">MATEMÁTICA</label>
+        <input type="checkbox" id="matematica" name="nivel[]" value="MATEMATICA">
+        
+        <label for="fisica" class="disciplina">FÍSICA</label>
+        <input type="checkbox" id="fisica" name="nivel[]" value="FISICA">
+        
+        <label for="quimica" class="disciplina">QUÍMICA</label>
+        <input type="checkbox" id="quimica" name="nivel[]" value="QUIMICA">
+        
+        <label for="dgd" class="disciplina">DGD</label>
+        <input type="checkbox" id="dgd" name="nivel[]" value="DGD">
+     
+
+    </div>
+        </div>
+    </div>
+</div>
+            <button type="submit" class="btn-pagamento">FAZER PAGAMENTO</button>
+        </form>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Nandzika Academy. Todos os direitos reservados.</p>
+        <div class="footer-links">
+            <a href="#">Política de Privacidade</a>
+            <a href="#">Termos de Uso</a>
+            <a href="#">FAQ</a>
+        </div>
+    </footer>
+<script src="script.js"></script>
+<div id="modalConfirma" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); align-items: center; justify-content: center; z-index: 10000; padding: 20px;">
+    <div style="background: white; padding: 25px; width: 100%; max-width: 450px; border-radius: 15px; color: #333; max-height: 90vh; overflow-y: auto;">
+        <h3 style="color: #000; margin-top: 0; border-bottom: 2px solid #fdd835; padding-bottom: 10px;">Confirme sua Inscrição</h3>
+        <div id="resumoDados" style="margin: 20px 0; line-height: 1.6;"></div>
+        <button onclick="enviarFinal()" style="width: 100%; padding: 15px; background: #2ecc71; color: white; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; margin-bottom: 10px;">TUDO CERTO, ENVIAR!</button>
+        <button onclick="fecharModal()" style="width: 100%; background: none; border: 1px solid #ccc; padding: 10px; border-radius: 8px; cursor: pointer; color: #666;">VOLTAR E EDITAR</button>
+    </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const form = document.querySelector('.registration-form');
+    if (form) {
+        form.addEventListener('submit', function(event) {
+            event.preventDefault(); 
+            const bairro = document.querySelector('input[name="bairro"]:checked')?.value;
+            const horario = document.querySelector('input[name="horario"]:checked')?.value;
+            const niveis = document.querySelectorAll('input[name="nivel[]"]:checked');
+            if (!bairro || !horario || niveis.length === 0) {
+                alert("Por favor, selecione o Bairro, Horário e pelo menos uma Disciplina.");
+                return;
+            }
+            // Preencher resumo no Modal
+            const nome = document.getElementById('nome').value;
+            const chosen = Array.from(niveis).map(cb => cb.value).join(", ");
+            document.getElementById('resumoDados').innerHTML = `
+                <div style="border-bottom: 1px dashed #ccc; padding: 5px 0;"><strong>Nome:</strong> ${nome}</div>
+                <div style="border-bottom: 1px dashed #ccc; padding: 5px 0;"><strong>Bairro:</strong> ${bairro.toUpperCase()}</div>
+                <div style="border-bottom: 1px dashed #ccc; padding: 5px 0;"><strong>Horário:</strong> ${horario}</div>
+                <div style="border-bottom: 1px dashed #ccc; padding: 5px 0;"><strong>Disciplinas:</strong> ${chosen}</div>
+            `;
+            document.getElementById('modalConfirma').style.display = 'flex';
+        });
+    }
+});
+
+function enviarFinal() {
+    const btn = event.target;
+    btn.disabled = true;
+    btn.innerText = "ENVIANDO...";
+    // 1. Coletar os dados
+    const nome = document.getElementById('nome').value;
+    const email = document.getElementById('email').value;
+    const tel = document.getElementById('telefone').value;
+    const idade = document.getElementById('idade').value;
+    const bairro = document.querySelector('input[name="bairro"]:checked').value;
+    const horario = document.querySelector('input[name="horario"]:checked').value;
+    const niveis = document.querySelectorAll('input[name="nivel[]"]:checked');
+    const chosen = Array.from(niveis).map(cb => cb.value);
+    const nivelStr = chosen.join(", ");
+    // 2. SALVAR NA MEMÓRIA
+    const dadosMatricula = {
+        nome: nome,
+        bairro: bairro,
+        horario: horario,
+        nivel: nivelStr
+    };
+    localStorage.setItem('dadosMatricula', JSON.stringify(dadosMatricula));
+    // 3. Preparar dados para o EmailJS
+    const dadosParaEnvio = {
+        to_name: nome,
+        aluno_email: email,
+        aluno_tel: tel,
+        aluno_idade: idade,
+        aluno_bairro: bairro.toUpperCase(),
+        aluno_horario: horario,
+        aluno_nivel: nivelStr
+    };
+    // 4. Enviar via EmailJS
+    emailjs.send("service_i6u51l1", "template_7f4fcc1", dadosParaEnvio)
+    .then(() => {
+        window.location.href = "pagamentos.html";
+    })
+    .catch((error) => {
+        console.error("Erro:", error);
+        alert("Erro ao enviar. Verifique sua conexão.");
+        btn.disabled = false;
+        btn.innerText = "TUDO CERTO, ENVIAR!";
+    });
+}
+</script>
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+<script type="text/javascript">
+   (function(){
+      emailjs.init("uMCL6Uij9v1pgoqm9"); 
+   })();
+</script>
+</body>
+</html>
