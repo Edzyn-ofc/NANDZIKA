@@ -3,145 +3,234 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nandzika Academy</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Tsakalo's Fashion | Premium Store</title>
+    <style>
+        :root {
+            --azul-escuro: #1a3a5a;
+            --dourado: #c5a059;
+            --gelo: #f4f4f4;
+            --branco: #ffffff;
+            --whatsapp: #25d366;
+        }
 
+        body { font-family: 'Segoe UI', sans-serif; margin: 0; background: var(--gelo); }
 
+        /* MENU HAMBÚRGUER & HEADER */
+        header {
+            background: var(--azul-escuro);
+            color: white;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .menu-icon { font-size: 30px; cursor: pointer; }
+        
+        .nav-menu {
+            position: fixed;
+            top: 0; left: -250px;
+            width: 250px; height: 100%;
+            background: #333;
+            transition: 0.3s;
+            padding-top: 60px;
+        }
+        .nav-menu.active { left: 0; }
+        .nav-menu a { display: block; color: white; padding: 15px 25px; text-decoration: none; }
+
+        /* FILTROS E BUSCA */
+        .controls { padding: 20px; text-align: center; background: white; }
+        .busca-container { margin-bottom: 15px; }
+        .busca-input { padding: 10px; width: 60%; border-radius: 5px; border: 1px solid #ddd; }
+        
+        .categorias { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; }
+        .btn-filter { 
+            padding: 8px 15px; border: none; border-radius: 20px; 
+            cursor: pointer; background: #ddd; transition: 0.3s;
+        }
+        .btn-filter.active { background: var(--dourado); color: white; }
+
+        /* GRID DE PRODUTOS */
+        .container { 
+            max-width: 1200px; margin: 20px auto; 
+            display: grid; 
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); 
+            gap: 20px; padding: 0 20px;
+        }
+
+        /* CARD DE PRODUTO */
+        .card { 
+            background: white; border-radius: 10px; padding: 15px; 
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            display: flex; flex-direction: column;
+        }
+        .main-img { 
+            width: 100%; height: 250px; object-fit: cover; 
+            border-radius: 8px; cursor: pointer;
+        }
+        
+        .thumbs { display: grid; grid-template-columns: repeat(4, 1fr); gap: 5px; margin-top: 10px; }
+        .thumb { 
+            width: 100%; height: 50px; object-fit: cover; 
+            border-radius: 4px; cursor: pointer; border: 2px solid transparent;
+        }
+        .thumb:hover { border-color: var(--dourado); }
+
+        .card h3 { margin: 15px 0 5px; font-size: 1.1em; }
+        .card-desc { color: #666; font-size: 0.85em; margin-bottom: 10px; min-height: 40px; }
+        .preco { font-weight: bold; color: var(--azul-escuro); font-size: 1.2em; margin-bottom: 15px; }
+
+        .btn-pedido {
+            background: var(--whatsapp); color: white; border: none;
+            padding: 12px; border-radius: 5px; font-weight: bold; cursor: pointer;
+        }
+
+        footer { text-align: center; padding: 40px; background: var(--azul-escuro); color: white; margin-top: 50px; }
+    </style>
 </head>
 <body>
 
-    <header>
-        <div class="logo">NANDZIKA <span>ACADEMY</span></div>
-        <nav>
-            <ul>
-                <li><a href="#sobre-nos">SOBRE NÓS</a></li>
-                <li><a href="#cursos">CURSOS</a></li>
-                <li><a href="#contacto">CONTACTO</a></li>
-            </ul>
-        </nav>
-    </header>
+<header>
+    <div class="menu-icon" onclick="toggleMenu()">☰</div>
+    <h1 style="font-size: 1.2em;">TSAKALO'S FASHION</h1>
+    <div style="width: 30px;"></div> </header>
 
-    <div class="welcome-banner">
-        <h3>🎓 Bem-vindo à Nandzika Academy</h3>
-        <p>Educação de qualidade em Inglês, Ciências e muito mais</p>
+<nav class="nav-menu" id="navMenu">
+    <a href="#" onclick="toggleMenu()">✖ Fechar</a>
+    <a href="#produtos">Produtos</a>
+    <a href="#sobre">Sobre Nós</a>
+    <a href="#contatos">Contactos</a>
+</nav>
+
+<div class="controls">
+    <div class="busca-container">
+        <input type="text" id="searchInput" class="busca-input" placeholder="Pesquisar produto..." onkeyup="filtrarTudo()">
+    </div>
+    <div class="categorias" id="categoryButtons">
+        <button class="btn-filter active" onclick="setCategory('todos')">Todos</button>
+        <button class="btn-filter" onclick="setCategory('calcados')">Calçados</button>
+        <button class="btn-filter" onclick="setCategory('camisas')">Camisas</button>
+        <button class="btn-filter" onclick="setCategory('acessorios')">Acessórios</button>
+        <button class="btn-filter" onclick="setCategory('camisetas')">Camisetas</button>
+        <button class="btn-filter" onclick="setCategory('calcas')">Calças</button>
+    </div>
+</div>
+
+<div class="container" id="productGrid">
     </div>
 
-    <div class="container">
-        <div class="hero-grid">
-            <div class="card card-image">
-                
-                <div style="z-index: 1;">
-                    <img src="img/IMG-20260206-WA0051~2.jpg" alt="Logo da Nandzika Academy" width="450">
+<footer>&copy; 2026 Tsakalo's Fashion</footer>
+
+<script>
+    // 1. DADOS DOS PRODUTOS (Exemplo de estrutura para 20+ produtos)
+    const produtos = [
+        {
+            id: 1,
+            categoria: 'calcados',
+            nome: 'Sapato Oxford Premium',
+            preco: '3.500 MT',
+            fotos: [
+                { url: 'https://images.unsplash.com/photo-1549298916-b41d501d3772?w=400', desc: 'Visão Frontal - Couro Legítimo' },
+                { url: 'https://images.unsplash.com/photo-1560769629-975ec94e6a86?w=400', desc: 'Detalhe Lateral' },
+                { url: 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=400', desc: 'Sola Antiderrapante' },
+                { url: 'https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?w=400', desc: 'Embalagem de Luxo' }
+            ]
+        },
+        {
+            id: 2,
+            categoria: 'camisas',
+            nome: 'Camisa Slim Fit Gelo',
+            preco: '1.800 MT',
+            fotos: [
+                { url: 'https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=400', desc: 'Algodão Egípcio' },
+                { url: 'https://images.unsplash.com/photo-1589310243389-96a5483213a8?w=400', desc: 'Punho Ajustável' },
+                { url: 'https://images.unsplash.com/photo-1604691815943-34aa3e8464f8?w=400', desc: 'Gola Rígida' },
+                { url: 'https://images.unsplash.com/photo-1621072156002-e2fcced0b170?w=400', desc: 'Costura Reforçada' }
+            ]
+        },
+        // Adicione mais 18 produtos seguindo esse padrão...
+    ];
+
+    let categoriaAtual = 'todos';
+
+    function renderizarProdutos(lista) {
+        const grid = document.getElementById('productGrid');
+        grid.innerHTML = '';
+
+        lista.forEach(p => {
+            const card = document.createElement('div');
+            card.className = 'card';
+            card.innerHTML = `
+                <img src="${p.fotos[0].url}" class="main-img" id="main-${p.id}" title="${p.fotos[0].desc}">
+                <div class="thumbs">
+                    ${p.fotos.map((f, index) => `
+                        <img src="${f.url}" class="thumb" 
+                             onclick="mudarFoto(${p.id}, '${f.url}', '${f.desc}')" 
+                             onmouseover="mostrarTooltip(this, '${f.desc}')" 
+                             title="${f.desc}">
+                    `).join('')}
                 </div>
-            </div>
-            <div class="card">
-                <p><strong>🏛️ BEM VINDO!</strong></p><br>
-                <p style="font-size: 13px; line-height: 1.5; color: #555;">A NOSSA ACADEMIA ESPECIALIZADA NO ENSINO E APRENDIZADO COM BASES SÓLIDAS PARA DIRECIONAR O EDUCANDO AO SUCESSO...</p>
-            </div>
-        </div>
-<br><br><br>
-        <div class="card card-image" style="min-height: 200px; margin-bottom: 40px;">
-            <div class="placeholder-img">[FOTO GRANDE AQUI]</div>
-           <iframe 
-  src="https://www.youtube.com/embed/kdELU_wkrq8"
-  title="YouTube video player"
-  frameborder="0"
-  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-  allowfullscreen>
-</iframe>   
-        </div>
+                <h3>${p.nome}</h3>
+                <p class="card-desc" id="desc-${p.id}">${p.fotos[0].desc}</p>
+                <span class="preco">${p.preco}</span>
+                <button class="btn-pedido" onclick="fazerPedido(${p.id})">Pedir no WhatsApp</button>
+            `;
+            grid.appendChild(card);
+        });
+    }
+
+    // 2. FUNÇÕES DE INTERAÇÃO
+    function mudarFoto(id, url, desc) {
+        document.getElementById(`main-${id}`).src = url;
+        document.getElementById(`desc-${id}`).innerText = desc;
+    }
+
+    function toggleMenu() {
+        document.getElementById('navMenu').classList.toggle('active');
+    }
+
+    function setCategory(cat) {
+        categoriaAtual = cat;
+        const buttons = document.querySelectorAll('.btn-filter');
+        buttons.forEach(btn => btn.classList.remove('active'));
+        event.target.classList.add('active');
+        filtrarTudo();
+    }
+
+    function filtrarTudo() {
+        const termo = document.getElementById('searchInput').value.toLowerCase();
         
-<br><br><br>
+        const filtrados = produtos.filter(p => {
+            const matchesCat = (categoriaAtual === 'todos' || p.categoria === categoriaAtual);
+            const matchesSearch = p.nome.toLowerCase().includes(termo);
+            return matchesCat && matchesSearch;
+        });
+        
+        renderizarProdutos(filtrados);
+    }
 
-        <h2 class="section-title" id="cursos"> CURSOS </h2>
-       
-            
-            
-            
-            <div class="courses-grid">
-           <div class="course-card">
-                <h4>Aulas Presenciais</h4>
-                <ul>
-                    <li>✔ Inglês Presencial</li>
-                    <li>✔ Maputo (Zonas Específicas)</li>
-                    <li>✔ Certificado de Inglês</li>
-                </ul><br><br><br>
+    function fazerPedido(id) {
+        const p = produtos.find(item => item.id === id);
+        const fotoAtual = document.getElementById(`main-${id}`).src;
+        const descAtual = document.getElementById(`desc-${id}`).innerText;
+        
+        const numero = "258848534256";
+        const mensagem = `*NOVO PEDIDO*\n\n` +
+                         `*Produto:* ${p.nome}\n` +
+                         `*Detalhe:* ${descAtual}\n` +
+                         `*Preço:* ${p.preco}\n\n` +
+                         `*Link da Foto:* ${fotoAtual}`;
 
-               <a href="curso-presencial.html">
-                <button class="btn-aderir">ADERIR AGORA</button></a>
-            </div>  
-            <div class="course-card">
-                <h4>Aulas Online</h4>
-                <ul>
-                    <li>✔ Inglês Online</li>
-                    <li>✔ Horários Flexíveis</li>
-                    <li>✔ Para todo o país</li>
-                </ul><br><br><br>
+        const url = `https://api.whatsapp.com/send?phone=${numero}&text=${encodeURIComponent(mensagem)}`;
+        window.location.href = url;
+    }
 
-                <a href="curso-online.html">
-                <button class="btn-aderir">ADERIR AGORA</button></a>
-            </div>
-            <div class="course-card">
-                <h4>Explicações Ciências</h4>
-                <ul>
-                    <li>✔ Explicações de DGD</li>
-                    <li>✔ Ensino Secundário</li>
-                    <li>✔ Suporte Escolar</li>
-                </ul><br><br><br>
+    // Inicializar loja
+    renderizarProdutos(produtos);
+</script>
 
-                <a href="explicacao.html">
-                <button class="btn-aderir">ADERIR AGORA</button></a>
-            </div>
-        </div>
-<br><br><br>
-        <div class="about-section" id="sobre-nos">
-            <h2>Sobre Nós</h2>
-            <div class="about-grid">
-                <div class="about-item">
-                    <h5>Missão</h5>
-                    <p style="font-size: 11px; margin-top: 10px;">Capacitar estudantes através de educação de qualidade.</p>
-                </div>
-                <div class="about-item">
-                    <h5>Experiência</h5>
-                    <p style="font-size: 11px; margin-top: 10px;">Mais de 10 anos de experiência no ensino qualificado.</p>
-                </div>
-                <div class="about-item">
-                    <h5>Certificados</h5>
-                    <p style="font-size: 11px; margin-top: 10px;">Oferecemos certificados de alto nivel.</p>
-                </div>
-            </div>
-        </div>
-        <br><br><br><br><br>
-        <h2 class="section-title" id="contacto">CONTACTOS</h2>
-        <div class="contact-grid">
-            <div class="contact-box">
-                <span>📞</span>
-                <div>
-                    <strong>TELEFONE</strong><br>
-                    <small>+258 87 961 5045</small><br>
-                    <small>+258 84 921 5273</small>
-
-                </div>
-            </div>
-            <div class="contact-box">
-                <span>📧</span>
-                <div>
-                    <strong>E-MAIL</strong><br>
-                    <small>Nandzikaacademy@gmail.com</small>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <footer>
-        © 2026 Nandzika Academy. Todos os direitos reservados.
-        <div class="footer-links">
-            <a href="#">Política de Privacidade</a>
-            <a href="#">Termos de Uso</a>
-            <a href="#">FAQ</a>
-        </div>
-    </footer>
-
-    <script src="script.js"></script>
 </body>
 </html>
